@@ -13,26 +13,27 @@ const { NotImplementedError } = require("../extensions/index.js");
  *
  */
 class DepthCalculator {
+  result = 1;
   calculateDepth(arr) {
     //throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
-    let countOfNestings = 1;
+    // this.result = 1;
     let countOfNestingsArr = [1];
-    function dept(arr) {
-      for (let elem of arr) {
-        if (Array.isArray(elem)) {
-          countOfNestings++;
-          dept(elem);
-        }
+    for (let elem of arr) {
+      if (Array.isArray(elem)) {
+        this.result++;
+        this.calculateDepth(elem);
       }
-
-      countOfNestingsArr.push(countOfNestings);
-      countOfNestings = 1;
+      countOfNestingsArr.push(this.result);
+      this.result = 1;
     }
-    dept(arr);
-    let result = Math.max(...countOfNestingsArr);
-    console.log(result);
-    return result;
+
+    // countOfNestings = 1;
+    // dept(arr);
+    // let result = Math.max(...countOfNestingsArr);
+    console.log(countOfNestingsArr);
+    console.log(this.result);
+    return this.result;
   }
 }
 
@@ -56,7 +57,7 @@ depthCalc.calculateDepth([
 // expect(spy1.callCount).to.be.greaterThan(1);
 // spy1.restore();
 // const spy2 = sinon.spy(instance, 'calculateDepth');
-depthCalc.calculateDepth([[[[[[[[[[]]]]]]]]]]);
+//depthCalc.calculateDepth([[[[[[[[[[]]]]]]]]]]);
 // 10);
 // expect(spy2.callCount).to.be.greaterThan(1);
 // spy2.restore();
