@@ -1,4 +1,4 @@
-const { NotImplementedError } = require("../extensions/index.js");
+const { NotImplementedError } = require('../extensions/index.js');
 
 /**
  * Extract season from given date and expose the enemy scout!
@@ -14,24 +14,25 @@ const { NotImplementedError } = require("../extensions/index.js");
 function getSeason(date) {
   // throw new NotImplementedError('Not implemented');
   // remove line with error and write your code here
-  // if (!(typeof obj === "object") || Array.isArray(obj) || obj == null) {
-  //   throw new Error("IInvalid date!");
-  // }
-
+  if (arguments.length == 0) return 'Unable to determine the time of year!';
   if (
-    !(Object.prototype.toString.call(date) === "[object Date]") &
-    !(date instanceof Date)
-  )
-    throw new Error("Invalid date!");
+    (date instanceof Date === false ||
+      Object.getOwnPropertyNames(date).length > 0) &&
+    arguments.length > 0
+  ) {
+    throw new Error('Invalid date!');
+  }
 
-  if (getSeason.arguments.length == 0) throw new Error("Invalid date!");
-  let month = date.getMonth();
-  console.log(month);
-  console.log(typeof month);
-  if ((month > 1) & (month < 3)) return "winter";
-  else if ((month > 3) & (month < 8)) return "spring";
-  else if ((month > 5) & (month < 9)) return "summer";
-  else if ((month > 8) & (month < 13)) return "autumn";
+  let monthNumber = date.getMonth() + 1;
+
+  let monthLong = '';
+
+  if (monthNumber > 2 && monthNumber < 6) monthLong = 'spring';
+  if (monthNumber > 5 && monthNumber < 9) monthLong = 'summer';
+  if (monthNumber > 8 && monthNumber < 12) monthLong = 'autumn';
+  if (monthNumber == 12 || (monthNumber > 0 && monthNumber < 3))
+    monthLong = 'winter';
+  return monthLong;
 }
 
 module.exports = {
