@@ -21,13 +21,12 @@ const { NotImplementedError } = require('../lib');
  */
 class VigenereCipheringMachine {
   encrypt() {
-    // Remove line below and write your code here
     throw new NotImplementedError('Not implemented');
+    // remove line with error and write your code here
   }
-
   decrypt() {
-    // Remove line below and write your code here
     throw new NotImplementedError('Not implemented');
+    // remove line with error and write your code here
   }
 }
 
